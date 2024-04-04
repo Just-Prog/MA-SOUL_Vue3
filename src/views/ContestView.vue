@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    CONTEST - MA-SOUL OJ
+    Construcing
 </template>
 
 <style scoped>

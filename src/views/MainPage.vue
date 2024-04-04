@@ -3,7 +3,8 @@
 </script>
 
 <template>
-    MainPage MA-SOUL
+    MainPage
+    
 </template>
 
 <style scoped>
