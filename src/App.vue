@@ -1,12 +1,13 @@
 <script setup>
-import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { watch } from 'vue'
+import { RouterLink, RouterView, useRouter, useRoute, onBeforeRouteUpdate, onBeforeRouteLeave } from 'vue-router'
 // import NavBar from './components/NavBar.vue'
-const router = useRouter().options.routes
-console.log(router)
-const backMain = ()=>{
+const routers = useRouter().options.routes
+const route = useRoute();
+const isLogin = 0;
+function back2Main(){
   window.location = '/'
 }
-const isLogin = 0;
 </script>
 
 <template>
@@ -14,14 +15,14 @@ const isLogin = 0;
     <el-container>
       <el-header>
         <el-menu id="nav" mode="horizontal" :ellipsis="false">
-          <div class="nav_item ver_center" @click="backMain">
+          <div class="nav_item ver_center" @click='back2Main'>
             <img src='@/assets/logo_nav.png' height="40px"/>
           </div>
           <div style="flex-grow: 1 ;"/>
-          <template v-for="(item) in router" :key="item.meta.id">
+          <template v-for="(item) in routers" :key="item.meta.id">
             <el-menu-item :index="item.meta.id">
               <router-link :to="item.path">
-                {{item.meta.title}}
+                {{ item.meta.title }}
               </router-link>
             </el-menu-item>
           </template>
@@ -43,19 +44,15 @@ const isLogin = 0;
       <el-container id="MainLayout_content">
         <el-aside width="180px" id="sidebar">
           <el-scrollbar>
-            <el-menu>
-              <el-menu-item index="1-1">
-                <el-icon><House /></el-icon>
-                课程主页
-              </el-menu-item>
-              <el-menu-item index="1-2">
-                <el-icon><Notebook /></el-icon>
-                我的课程
-              </el-menu-item>
-              <el-menu-item index="1-3">
-                <el-icon><QuestionFilled /></el-icon>
-                课程帮助
-              </el-menu-item>
+            <el-menu id="sidebar_content">
+              <template v-for="(i) in route.meta.modules">
+                <el-menu-item :index="i.id">  
+                  <el-icon> 
+                    <component :is="i.icon"></component>
+                  </el-icon>
+                   <router-link :to="i.to">{{i.name}}</router-link>
+                </el-menu-item>
+              </template>
             </el-menu>
           </el-scrollbar>
         </el-aside>
