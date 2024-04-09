@@ -1,32 +1,31 @@
 <script setup>
-import { watch } from 'vue'
-import { RouterLink, RouterView, useRouter, useRoute, onBeforeRouteUpdate, onBeforeRouteLeave } from 'vue-router'
-// import NavBar from './components/NavBar.vue'
+import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router'
 const routers = useRouter().options.routes
-const route = useRoute();
-const isLogin = 0;
+const route = useRoute()
+const isLogin = 0
 function back2Main(){
   window.location = '/'
 }
+
 </script>
 
 <template>
   <div id="MainLayout">
     <el-container>
       <el-header>
-        <el-menu id="nav" mode="horizontal" :ellipsis="false">
+        <el-menu id="nav" mode="horizontal" :ellipsis="false" :default-active=route.path>
           <div class="nav_item ver_center" @click='back2Main'>
             <img src='@/assets/logo_nav.png' height="40px"/>
           </div>
-          <div style="flex-grow: 1 ;"/>
+          <!-- <div style="flex-grow: 1 ;"/> -->
           <template v-for="(item) in routers" :key="item.meta.id">
-            <el-menu-item :index="item.meta.id">
+            <el-menu-item :index="item.path">
               <router-link :to="item.path">
                 {{ item.meta.title }}
               </router-link>
             </el-menu-item>
           </template>
-          <div class="nav_item ver_center">
+          <div class="nav_item_r ver_center">
             <template v-if="!isLogin">
               <el-button type="primary" bg>
                 登录
@@ -50,7 +49,7 @@ function back2Main(){
                   <el-icon> 
                     <component :is="i.icon"></component>
                   </el-icon>
-                   <router-link :to="i.to">{{i.name}}</router-link>
+                   <router-link :to="i.to" style="font-size: small;">{{i.name}}</router-link>
                 </el-menu-item>
               </template>
             </el-menu>
@@ -58,6 +57,9 @@ function back2Main(){
         </el-aside>
         <el-main id="main">
           <RouterView/>
+          <el-footer>
+            111
+          </el-footer>
         </el-main>
       </el-container>
     </el-container>
@@ -72,13 +74,15 @@ function back2Main(){
   #nav {
       padding: 0 0vh;
   }
-  .el-header{
+  .el-header,.el-footer{
     padding:0 0 ;
   }
 
-  .el-menu-item a {
+  .el-menu-item a,a:link,a:hover {
       text-decoration: none;
-      font-size: medium;
+      font-size: small;
+      color: rgb(0,0,0);
+      
   }
   #MainLayout{
     min-height: 100vh;
@@ -89,7 +93,10 @@ function back2Main(){
   #main{
     float:right;
   }
-  .nav_item{
+  .nav_item,.nav_item_r {
     padding:0 20px;
+  }
+  .nav_item_r{
+    margin-left: auto;
   }
 </style>
