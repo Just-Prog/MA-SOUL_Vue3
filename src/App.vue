@@ -42,7 +42,7 @@ function back2Main(){
       </el-header>
       <el-container id="MainLayout_content">
         <el-aside width="180px" id="sidebar">
-          <el-scrollbar>
+          <!-- <el-scrollbar> -->
             <el-menu id="sidebar_content">
               <template v-for="(i) in route.meta.modules">
                 <el-menu-item :index="i.id">  
@@ -53,12 +53,17 @@ function back2Main(){
                 </el-menu-item>
               </template>
             </el-menu>
-          </el-scrollbar>
+          <!-- </el-scrollbar> -->
         </el-aside>
         <el-main id="main">
-          <RouterView/>
-          <el-footer>
-            111
+          <div id="route-content">
+            <RouterView/>
+          </div>
+          <el-footer id="footer">
+            <div id="footer-l">
+              <img src="@/assets/logo.png" height="80px"></img>
+            </div>
+            <div id="footer-r" style="text-align: right;">Funding for this program<br>was made possible by<br>viewers like <font color="red">You</font>.</div>
           </el-footer>
         </el-main>
       </el-container>
@@ -67,6 +72,22 @@ function back2Main(){
 </template>
 
 <style scoped>
+  #MainLayout{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+  }
+  #MainLayout .el-container{
+    height: 100%;
+  }
+  #main{
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   .ver_center {
       display: flex;
       align-items: center;
@@ -77,26 +98,45 @@ function back2Main(){
   .el-header,.el-footer{
     padding:0 0 ;
   }
-
+  #sidebar .el-menu{
+    background: #f7f9fb;
+    height: 100%;
+  }
   .el-menu-item a,a:link,a:hover {
       text-decoration: none;
       font-size: small;
       color: rgb(0,0,0);
-      
-  }
-  #MainLayout{
-    min-height: 100vh;
   }
   #sidebar{
     float:left;
-  }
-  #main{
-    float:right;
   }
   .nav_item,.nav_item_r {
     padding:0 20px;
   }
   .nav_item_r{
     margin-left: auto;
+  }
+  .el-main{
+    height: 100%;
+    padding: 0 0;
+  }
+  #main #route-content{
+    padding: 20px 20px;
+  }
+  #footer{
+    border-top: 1px solid var(--el-menu-border-color);
+    padding:20px 0;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+    height:auto;
+    /* background-color: #e799b0; */
+  }
+  #footer div{
+    margin:auto 20px;
+  }
+  #footer-r{
+    line-height: 135%;
   }
 </style>
