@@ -55,17 +55,19 @@ function back2Main(){
             </el-menu>
           <!-- </el-scrollbar> -->
         </el-aside>
-        <el-main id="main">
-          <div id="route-content">
-            <RouterView/>
-          </div>
+        <el-container id="main">
+          <el-main style="height:0;flex-grow:1;">
+            <el-scrollbar id="route-content">
+              <RouterView/>
+            </el-scrollbar>
+          </el-main>
           <el-footer id="footer">
             <div id="footer-l">
               <img src="@/assets/logo.png" height="80px"></img>
             </div>
             <div id="footer-r" style="text-align: right;">Funding for this program<br>was made possible by<br>viewers like <font color="red">You</font>.</div>
           </el-footer>
-        </el-main>
+        </el-container>
       </el-container>
     </el-container>
   </div>
@@ -74,7 +76,9 @@ function back2Main(){
 <style scoped>
   #MainLayout{
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    max-height: 100vh;
+    height: 100vh;
     position: absolute;
     top:0;
     left:0;
@@ -120,9 +124,6 @@ function back2Main(){
     height: 100%;
     padding: 0 0;
   }
-  #main #route-content{
-    padding: 20px 20px;
-  }
   #footer{
     border-top: 1px solid var(--el-menu-border-color);
     padding:20px 0;
@@ -130,7 +131,7 @@ function back2Main(){
     flex-direction: row;
     justify-content: space-between;
     justify-items: center;
-    height:auto;
+    height: 115px;
     /* background-color: #e799b0; */
   }
   #footer div{
@@ -139,4 +140,5 @@ function back2Main(){
   #footer-r{
     line-height: 135%;
   }
+  
 </style>
