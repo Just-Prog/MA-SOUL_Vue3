@@ -1,12 +1,20 @@
 <script setup>
+import { ref } from 'vue'
 import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router'
 const routers = useRouter().options.routes
 const route = useRoute()
-const isLogin = 0
+const isLogin = ref(false)
 function back2Main(){
   window.location = '/'
 }
-
+const needLogin = ref(false)
+const needReg = ref(false)
+const account = ref({})
+const onLoginDataSubmit = ()=>{
+  isLogin.value = true;
+  needLogin.value = false;
+  //TODO
+}
 </script>
 
 <template>
@@ -27,15 +35,21 @@ function back2Main(){
           </template>
           <div class="nav_item_r ver_center">
             <template v-if="!isLogin">
-              <el-button type="primary" bg>
-                登录
-              </el-button>
-              <el-button type="danger" bg>
-                注册
-              </el-button>
+              <el-badge is-dot>
+                <el-button type="primary" bg @click="needLogin = true">
+                  登录
+                </el-button>
+              </el-badge>
+              
+              <el-badge is-dot>
+                <el-button type="danger" bg @click="needReg = true">
+                  注册
+                </el-button>
+              </el-badge>
             </template>
             <template v-else>
               <el-avatar :fit="fill" src="/avatar/default.jpg"/>
+              <el-icon style="font-size:165%;" @click="isLogin=false"><SwitchButton /></el-icon>
             </template>
           </div>
         </el-menu>
@@ -65,11 +79,27 @@ function back2Main(){
             <div id="footer-l">
               <img src="@/assets/logo.png" height="80px"></img>
             </div>
-            <div id="footer-r" style="text-align: right;">Funding for this program<br>was made possible by<br>viewers like <font color="red">You</font>.</div>
+            <div id="footer-r" style="text-align: right;">Funding for this program<br>was made possible by<br>viewers like <span style="color: red">YOU</span>.</div>
           </el-footer>
         </el-container>
       </el-container>
     </el-container>
+    <el-dialog title="登录/Login" v-model="needLogin" width="700px">
+        <el-form :model="account" label-width="55px" label-position="left" size="large">
+          <el-form-item label="用户名">
+            <el-input v-model="account.username" required autofocus placeholder="Type your username here"></el-input>
+          </el-form-item>
+          <el-form-item label="密码">
+            <el-input v-model="account.pwd" showPassword placeholder="Type your password here"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onLoginDataSubmit">Create</el-button>
+            <el-button @click="needLogin=false">Cancel</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
+    <el-dialog title="注册/Register" v-model="needReg" width="45%">
+    </el-dialog>
   </div>
 </template>
 
@@ -119,6 +149,9 @@ function back2Main(){
   }
   .nav_item_r{
     margin-left: auto;
+  }
+  .nav_item_r *{
+    margin-left: 10px;
   }
   .el-main{
     height: 100%;

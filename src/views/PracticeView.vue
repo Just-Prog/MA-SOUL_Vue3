@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    MA-SOUL OJ Practice Platform
+    <el-empty :image-size="200" />  
 </template>
 
 <style scoped>

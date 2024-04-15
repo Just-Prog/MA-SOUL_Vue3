@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    Construcing
+    <el-empty :image-size="200" />
 </template>
 
 <style scoped>

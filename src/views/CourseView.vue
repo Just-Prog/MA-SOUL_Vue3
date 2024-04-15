@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    MA-SOUL E-learning Part
+    <el-empty :image-size="200" />
 </template>
 
 <style scoped>
