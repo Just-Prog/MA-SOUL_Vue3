@@ -11,9 +11,19 @@ const needLogin = ref(false)
 const needReg = ref(false)
 const account = ref({})
 const onLoginDataSubmit = ()=>{
-  isLogin.value = true;
-  needLogin.value = false;
-  //TODO
+  if(account.value.username && account.value.pwd){
+    isLogin.value = true;
+    needLogin.value = false;
+  }
+  // TODO
+}
+const onRegisterDataSubmit = ()=>{
+  if(account.value.username && account.value.pwd_ && account.value.pwd_===account.value.pwd){
+    console.log("注册成功")
+    needReg.value = false;
+  }else{
+    console.log("失败")
+  }
 }
 </script>
 
@@ -92,13 +102,24 @@ const onLoginDataSubmit = ()=>{
           <el-form-item label="密码">
             <el-input v-model="account.pwd" showPassword placeholder="Type your password here"></el-input>
           </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="onLoginDataSubmit">Create</el-button>
-            <el-button @click="needLogin=false">Cancel</el-button>
-          </el-form-item>
         </el-form>
+        <el-button type="primary" @click="onLoginDataSubmit">OK</el-button>
+        <el-button @click="needLogin=false">Cancel</el-button>
       </el-dialog>
     <el-dialog title="注册/Register" v-model="needReg" width="45%">
+      <el-form :model="account" label-width="75px" label-position="left" size="large">
+        <el-form-item label="用户名">
+          <el-input v-model="account.username" required autofocus placeholder="Type your username here"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input v-model="account.pwd" showPassword placeholder="Type your password here"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码">
+          <el-input v-model="account.pwd_" showPassword placeholder="Type your password here"></el-input>
+        </el-form-item>
+      </el-form>
+      <el-button type="primary" @click="onRegisterDataSubmit">Register</el-button>
+      <el-button @click="needLogin=false">Cancel</el-button>
     </el-dialog>
   </div>
 </template>
