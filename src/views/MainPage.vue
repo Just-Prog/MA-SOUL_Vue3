@@ -19,12 +19,17 @@ const MPInfo = {
             ],
             right: [
                 {
-                    code: "2",
+                    code: "2-1",
                     title: "",
                     category: "carousel",
                     content: ["/carousel/1.jpg","/carousel/2.png"]
                     //部分测试轮播图片为洛谷中国站(https://www.luogu.com.cn)主站banner图
                     //所有人：上海洛谷科技，请勿滥用
+                },{
+                    code: "2-2",
+                    title: "测试卡片信息3",
+                    category: "plain",
+                    content: '右侧卡片check换行\n右侧卡片check\n右侧卡片check\n右侧卡片check\n'
                 }
             ]
         }
@@ -45,7 +50,7 @@ onMounted(()=>{
                 <template v-for="i in MPInfo.data.left">
                     <template v-if="i.category==='plain'">
                         <el-col>
-                            <el-card shadow="hover">
+                            <el-card shadow="hover" class="card_content">
                                 <template v-if="i.title" #header>
                                     <span class="card-header-title">{{ i.title }}</span>
                                 </template>
@@ -69,7 +74,7 @@ onMounted(()=>{
                 <template v-for="i in MPInfo.data.right">
                     <template v-if="i.category==='plain'">
                         <el-col>
-                            <el-card shadow="hover">
+                            <el-card shadow="hover" class="card_content">
                                 <template v-if="i.title" #header>
                                     <span class="card-header-title">{{ i.title }}</span>
                                 </template>
@@ -100,5 +105,8 @@ onMounted(()=>{
     .card-header-title {
         font-weight: bold;
         font-size: larger;
+    }
+    .card_content {
+        white-space: pre-line;
     }
 </style>
