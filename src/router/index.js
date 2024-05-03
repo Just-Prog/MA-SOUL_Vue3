@@ -15,6 +15,8 @@ const router = createRouter({
           { name: "首页2", icon: "Notebook", id: "0-2", to: "/" },
           { name: "首页3", icon: "House", id: "0-3", to: "/" },
         ],
+        sidebar: true,
+        isHidden: false,
       },
     },
     {
@@ -29,6 +31,8 @@ const router = createRouter({
           { name: "我的课程", icon: "Notebook", id: "1-2", to: "/" },
           { name: "首页", icon: "House", id: "1-3", to: "/" },
         ],
+        sidebar: true,
+        isHidden: false,
       },
     },
     {
@@ -43,6 +47,8 @@ const router = createRouter({
           { name: "首页", icon: "Notebook", id: "2-2", to: "/" },
           { name: "首页", icon: "House", id: "2-3", to: "/" },
         ],
+        sidebar: true,
+        isHidden: false,
       },
     },
     {
@@ -57,6 +63,20 @@ const router = createRouter({
           { name: "首页", icon: "House", id: "3-2", to: "/" },
           { name: "首页", icon: "House", id: "3-3", to: "/" },
         ],
+        sidebar: true,
+        isHidden: false,
+      },
+    },
+    {
+      path: "/about",
+      name: "About",
+      component: () => import("../views/AboutView.vue"),
+      meta: {
+        title: "关于",
+        id: "4",
+        modules: [],
+        sidebar: false,
+        isHidden: true,
       },
     },
   ],

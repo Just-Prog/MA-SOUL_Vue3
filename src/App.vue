@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeMount } from 'vue'
 import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router'
 const routers = useRouter().options.routes
 const route = useRoute()
@@ -10,10 +10,13 @@ function back2Main(){
 const needLogin = ref(false)
 const needReg = ref(false)
 const account = ref({})
+const dataNotFulfilled = ref(false)
 const onLoginDataSubmit = ()=>{
   if(account.value.username && account.value.pwd){
     isLogin.value = true;
     needLogin.value = false;
+  }else{
+    dataNotFulfilled.value = true;
   }
   // TODO
 }
@@ -22,22 +25,34 @@ const onRegisterDataSubmit = ()=>{
     console.log("注册成功")
     needReg.value = false;
   }else{
-    console.log("失败")
+    dataNotFulfilled.value = true;
   }
 }
+onBeforeMount(()=>{
+  console.log(
+`    __  ______        _____ ____  __  ____ 
+   /  |/  /   |      / ___// __ \/ / / / / 
+  / /|_/ / /| |______\__ \/ / / / / / / /  
+ / /  / / ___ /_____/__/ / /_/ / /_/ / /___
+/_/  /_/_/  |_|    /____/\____/\____/_____/
+                                           
+MA-SOUL - Coding with Love & Peace & MA-SOUL without M`)
+});
+onMounted(()=>{
+  console.log("App mounted")
+})
 </script>
 
 <template>
   <div id="MainLayout">
     <el-container>
-      <el-header>
+      <el-header id="nav_header">
         <el-menu id="nav" mode="horizontal" :ellipsis="false" :default-active=route.path>
           <div class="nav_item ver_center" @click='back2Main'>
             <img src='@/assets/logo_nav.png' height="40px"/>
           </div>
-          <!-- <div style="flex-grow: 1 ;"/> -->
           <template v-for="(item) in routers" :key="item.meta.id">
-            <el-menu-item :index="item.path">
+            <el-menu-item :index="item.path" v-if="item.meta.isHidden=='0'">
               <router-link :to="item.path">
                 {{ item.meta.title }}
               </router-link>
@@ -65,8 +80,9 @@ const onRegisterDataSubmit = ()=>{
         </el-menu>
       </el-header>
       <el-container id="MainLayout_content">
-        <el-aside width="180px" id="sidebar">
+        <el-aside width="180px" id="sidebar" v-if="route.meta.sidebar">
           <!-- <el-scrollbar> -->
+            
             <el-menu id="sidebar_content">
               <template v-for="(i) in route.meta.modules">
                 <el-menu-item :index="i.id">  
@@ -80,24 +96,33 @@ const onRegisterDataSubmit = ()=>{
           <!-- </el-scrollbar> -->
         </el-aside>
         <el-container id="main">
-          <el-main style="height:0;flex-grow:1;">
-            <el-scrollbar id="route-content">
+          <el-main style="height:0;flex-grow:1;" id="route-content">
+            <!-- <el-scrollbar>
+
               <RouterView/>
-            </el-scrollbar>
+            </el-scrollbar> -->
+            <RouterView/>
           </el-main>
           <el-footer id="footer">
             <div id="footer-l">
               <img src="@/assets/logo.png" height="80px"></img>
             </div>
-            <div id="footer-r" style="text-align: right;">Funding for this program<br>was made possible by<br>viewers like <span style="color: red">YOU</span>.</div>
+            <div id="footer-r" style="text-align: right;">
+              Funding for this program<br>
+              was made possible by<br>
+              viewers like <router-link to="about" style="color:red">YOU</router-link>
+            </div>
           </el-footer>
         </el-container>
       </el-container>
     </el-container>
     <el-dialog title="登录/Login" v-model="needLogin" width="700px">
         <el-form :model="account" label-width="55px" label-position="left" size="large">
+          <el-form-item v-if="dataNotFulfilled">
+            <el-alert title="请确认所有必填项均填写后进行提交" type="warning" @close="dataNotFulfilled=false" />
+          </el-form-item>
           <el-form-item label="用户名">
-            <el-input v-model="account.username" required autofocus placeholder="Type your username here"></el-input>
+            <el-input v-model="account.username" required placeholder="Type your username here"></el-input>
           </el-form-item>
           <el-form-item label="密码">
             <el-input v-model="account.pwd" showPassword placeholder="Type your password here"></el-input>
@@ -108,8 +133,11 @@ const onRegisterDataSubmit = ()=>{
       </el-dialog>
     <el-dialog title="注册/Register" v-model="needReg" width="45%">
       <el-form :model="account" label-width="75px" label-position="left" size="large">
+        <el-form-item v-if="dataNotFulfilled">
+          <el-alert title="请确认所有必填项均填写后进行提交" type="warning" @close="dataNotFulfilled=false" />
+        </el-form-item>
         <el-form-item label="用户名">
-          <el-input v-model="account.username" required autofocus placeholder="Type your username here"></el-input>
+          <el-input v-model="account.username" required placeholder="Type your username here"></el-input>
         </el-form-item>
         <el-form-item label="密码">
           <el-input v-model="account.pwd" showPassword placeholder="Type your password here"></el-input>
@@ -125,6 +153,9 @@ const onRegisterDataSubmit = ()=>{
 </template>
 
 <style scoped>
+  #nav_header{
+    box-shadow: var(--el-box-shadow-lighter);
+  }
   #MainLayout{
     width: 100%;
     min-height: 100vh;
@@ -193,6 +224,9 @@ const onRegisterDataSubmit = ()=>{
   }
   #footer-r{
     line-height: 135%;
+  }
+  #route-content{
+    padding: 16px;
   }
   
 </style>
