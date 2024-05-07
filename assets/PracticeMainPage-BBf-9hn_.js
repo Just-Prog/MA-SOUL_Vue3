@@ -1,0 +1,1 @@
+import{_ as t,r as c,b as o,c as n,d as s}from"./index-D87o6PHI.js";const a={},r={id:"empty"};function _(i,m){const e=c("el-empty");return o(),n("div",r,[s(e,{"image-size":200})])}const d=t(a,[["render",_]]);export{d as default};
