@@ -22,7 +22,7 @@ const MPInfo = {
                     code: "2-1",
                     title: "",
                     category: "carousel",
-                    content: ["/carousel/1.jpg","/carousel/2.png"]
+                    content: ["/carousel/1.png","/carousel/2.png","/carousel/default.png"]
                     //部分测试轮播图片为洛谷中国站(https://www.luogu.com.cn)主站banner图
                     //所有人：上海洛谷科技，请勿滥用
                 },{
@@ -84,10 +84,11 @@ onMounted(()=>{
                     </template>
                     <template v-if="i.category==='carousel'">
                         <el-col>
-                            <el-carousel id="card_carousel" height="228px">
+                            <el-carousel width="100%" class="card_carousel">
                                 <el-carousel-item v-for="img in i.content" style="align-content: center;">
-                                    <img :src="img" width="100%"/>
+                                    <img :src="img" width="100%"></img>
                                 </el-carousel-item>
+                                <img src="/carousel/default.png" width="100%" style="opacity: 0;"/>
                             </el-carousel>
                         </el-col>
                     </template>
@@ -97,7 +98,7 @@ onMounted(()=>{
     </div>
 </template>
 
-<style scoped>
+<style>
     /* #cards_l *,#cards_r *{
         margin-top: 15px;
         margin-bottom: 15px;
@@ -108,5 +109,8 @@ onMounted(()=>{
     }
     .card_content {
         white-space: pre-line;
+    }
+    .el-carousel .el-carousel__container{
+        height: auto;
     }
 </style>

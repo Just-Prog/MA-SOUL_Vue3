@@ -6,78 +6,75 @@ const router = createRouter({
     {
       path: "/",
       name: "Main",
-      component: () => import("../views/MainPage.vue"),
+      component: () => import("@/pages/MainPage.vue"),
       meta: {
         title: "首页",
         id: "0",
-        modules: [
+        sidebar_items: [
           { name: "首页", icon: "House", id: "0-1", to: "/" },
           { name: "首页2", icon: "Notebook", id: "0-2", to: "/" },
           { name: "首页3", icon: "House", id: "0-3", to: "/" },
         ],
-        sidebar: true,
-        isHidden: false,
+        showOnNav: 1,
       },
     },
     {
       path: "/course",
       name: "Course",
-      component: () => import("../views/CourseView.vue"),
+      component: () => import("@/pages/CourseMainPage.vue"),
       meta: {
         title: "课程",
         id: "1",
-        modules: [
+        sidebar_items: [
           { name: "课程首页", icon: "House", id: "1-1", to: "/" },
           { name: "我的课程", icon: "Notebook", id: "1-2", to: "/" },
           { name: "首页", icon: "House", id: "1-3", to: "/" },
         ],
-        sidebar: true,
-        isHidden: false,
+        showOnNav: 1,
       },
     },
     {
       path: "/practice",
       name: "Practice",
-      component: () => import("../views/PracticeView.vue"),
+      component: () => import("@/pages/PracticeMainPage.vue"),
       meta: {
         title: "题库",
         id: "2",
-        modules: [
+        sidebar_items: [
           { name: "首页", icon: "House", id: "2-1", to: "/" },
           { name: "首页", icon: "Notebook", id: "2-2", to: "/" },
           { name: "首页", icon: "House", id: "2-3", to: "/" },
         ],
-        sidebar: true,
-        isHidden: false,
+        showOnNav: 1,
       },
     },
     {
       path: "/contest",
       name: "Contest",
-      component: () => import("../views/ContestView.vue"),
+      component: () => import("@/pages/ContestMainPage.vue"),
       meta: {
         title: "比赛",
         id: "3",
-        modules: [
-          { name: "比赛首页", icon: "House", id: "3-1", to: "/" },
-          { name: "首页", icon: "House", id: "3-2", to: "/" },
-          { name: "首页", icon: "House", id: "3-3", to: "/" },
+        sidebar_items: [
+          { name: "比赛首页", icon: "House", id: "3-1", to: "/", params: "" },
+          { name: "首页", icon: "House", id: "3-2", to: "/", params: "" },
+          { name: "首页", icon: "House", id: "3-3", to: "/", params: "" },
         ],
-        sidebar: true,
-        isHidden: false,
+        showOnNav: 1,
       },
     },
     {
       path: "/about",
       name: "About",
-      component: () => import("../views/AboutView.vue"),
-      meta: {
-        title: "关于",
-        id: "4",
-        modules: [],
-        sidebar: false,
-        isHidden: true,
-      },
+      component: () => import("@/pages/AboutPage.vue"),
+      meta: { title: "关于" },
+      // no nav
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "404Page",
+      component: () => import("@/pages/404.vue"),
+      meta: { title: "404" },
     },
   ],
 });
@@ -88,6 +85,5 @@ router.beforeEach((to,from,next)=>{
   }
   next();
 })
-
 
 export default router

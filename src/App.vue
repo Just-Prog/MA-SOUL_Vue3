@@ -51,8 +51,8 @@ onMounted(()=>{
           <div class="nav_item ver_center" @click='back2Main'>
             <img src='@/assets/logo_nav.png' height="40px"/>
           </div>
-          <template v-for="(item) in routers" :key="item.meta.id">
-            <el-menu-item :index="item.path" v-if="item.meta.isHidden=='0'">
+          <template v-for="(item) in routers">
+            <el-menu-item :index="item.path" v-if="item.meta.showOnNav">
               <router-link :to="item.path">
                 {{ item.meta.title }}
               </router-link>
@@ -80,11 +80,11 @@ onMounted(()=>{
         </el-menu>
       </el-header>
       <el-container id="MainLayout_content">
-        <el-aside width="180px" id="sidebar" v-if="route.meta.sidebar">
+        <el-aside width="180px" id="sidebar" v-if="route.meta.sidebar_items">
           <!-- <el-scrollbar> -->
             
             <el-menu id="sidebar_content">
-              <template v-for="(i) in route.meta.modules">
+              <template v-for="(i) in route.meta.sidebar_items">
                 <el-menu-item :index="i.id">  
                   <el-icon> 
                     <component :is="i.icon"></component>
