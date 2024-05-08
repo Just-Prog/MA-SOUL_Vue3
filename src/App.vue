@@ -195,14 +195,15 @@ onMounted(()=>{
   }
   #sidebar{
     float:left;
+    width: 240px;
   }
   .nav_item,.nav_item_r {
     padding:0 20px;
   }
-  .nav_item_r{
+  .nav_item_r {
     margin-left: auto;
   }
-  .nav_item_r *{
+  .nav_item_r div{
     margin-left: 10px;
   }
   .el-main{
