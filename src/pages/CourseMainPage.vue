@@ -1,10 +1,10 @@
-<script>
-
+<script setup>
+    
 </script>
 
 <template>
     <div id="empty">
-        <el-empty :image-size="200" />
+        <el-empty description="Constructing"/>
     </div>
 </template>
 
