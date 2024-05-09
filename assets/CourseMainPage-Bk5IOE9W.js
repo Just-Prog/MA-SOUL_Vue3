@@ -1,1 +1,0 @@
-import{_ as o,r as t,o as c,c as n,j as s}from"./index-B-lLDWQU.js";const r={},a={id:"empty"};function _(m,i){const e=t("el-empty");return c(),n("div",a,[s(e,{"image-size":200})])}const d=o(r,[["render",_]]);export{d as default};
