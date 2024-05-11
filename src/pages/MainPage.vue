@@ -56,14 +56,14 @@ onMounted(()=>{
             <el-col :sm="14" :xs="24" id="cards_l">
                 <el-row v-for="i in MPInfo.data.left">
                     <el-col class="card_col">
-                        <Card :data="i" :type="i.type"/>
+                        <Card :data="i"/>
                     </el-col>
                 </el-row>
             </el-col>
             <el-col :sm="10" :xs="24" id="cards_r">
                 <el-row v-for="i in MPInfo.data.right">
                     <el-col class="card_col">
-                        <Card :data="i" :type="i.type"/>
+                        <Card :data="i"/>
                     </el-col>
                 </el-row>
             </el-col>

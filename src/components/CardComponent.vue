@@ -1,6 +1,8 @@
 <script setup>
+    // import { ref } from 'vue';
+    import SearchTable from '@/components/SearchTable.vue';
     const props = defineProps(['data'])
-    console.log("Card Compnent:",props.data)
+    
 </script>
 <!-- based on element-plus -->
 <template>
@@ -38,6 +40,14 @@
                     </template>
                 </template>
             </el-row>
+        </el-card>
+    </template>
+    <template v-else-if="data.type=='search'">
+        <el-card shadow="hover" class="card_content">
+            <template v-if="data.title" #header>
+                <span class="card-header-title">{{ data.title }}</span>
+            </template>
+            <SearchTable :data="data.content"></SearchTable>
         </el-card>
     </template>
     <template v-else>

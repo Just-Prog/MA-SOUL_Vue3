@@ -54,12 +54,192 @@
           },
         ]
     }
+    const pData = {
+      title: "题库",
+      type: "search",
+      content:{
+        t_header: {
+          id:{
+            label:"题目编号",
+          },
+          title:{
+            label:"题目名称",
+          },
+          lv:{
+            label:"等级",
+          },
+        },
+        t_content:[
+          {
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },{
+            id:1,
+            title:"A+B 问题",
+            lv:"入门"
+          },{
+            id:3,
+            title:"A*B 问题",
+            lv:"简单"
+          },{
+            id:4,
+            title:"A*B 问题",
+            lv:"中等"
+          },{
+            id:2,
+            title:"A/B 问题",
+            lv:"中等"
+          },
+        ],
+      }
+    }
 </script>
 
 <template>
     <el-row :gutter="20">
         <el-col :xs="24" :sm="18">
-            <CardComponent :data='{content: "Constructing",title: "题库"}'/>
+            <CardComponent :data="pData"/>
         </el-col>
         <el-col :xs="24" :sm="6">
             <CardComponent :data="tagData"/>

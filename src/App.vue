@@ -45,7 +45,7 @@ onMounted(()=>{
 
 <template>
   <div id="MainLayout">
-    <el-container>
+    <el-container style="height: 100vh;max-height: 100vh">
       <el-header id="nav_header">
         <el-menu id="nav" mode="horizontal" :ellipsis="false" :default-active=route.path>
           <div class="nav_item ver_center" @click='back2Main'>
@@ -74,45 +74,43 @@ onMounted(()=>{
             </template>
             <template v-else>
               <el-avatar :fit="fill" src="/avatar/default.jpg"/>
-              <el-icon style="font-size:165%;" @click="isLogin=false"><SwitchButton /></el-icon>
+              <el-icon style="font-size:95%;" @click="isLogin=false"><SwitchButton /></el-icon>
             </template>
           </div>
         </el-menu>
       </el-header>
-      <el-container id="MainLayout_content">
-        <el-aside width="180px" id="sidebar" v-if="route.meta.sidebar_items">
-          <!-- <el-scrollbar> -->
-            
-            <el-menu id="sidebar_content">
-              <template v-for="(i) in route.meta.sidebar_items">
-                <el-menu-item :index="i.id">  
-                  <el-icon> 
-                    <component :is="i.icon"></component>
-                  </el-icon>
-                   <router-link :to="i.to" style="font-size: small;">{{i.name}}</router-link>
-                </el-menu-item>
-              </template>
-            </el-menu>
-          <!-- </el-scrollbar> -->
-        </el-aside>
-        <el-container id="main">
-          <el-main style="height:0;flex-grow:1;" id="route-content">
-            <!-- <el-scrollbar>
-
-              <RouterView/>
-            </el-scrollbar> -->
-            <RouterView/>
-          </el-main>
-          <el-footer id="footer">
-            <div id="footer-l">
-              <img src="@/assets/logo.png" height="80px"></img>
-            </div>
-            <div id="footer-r" style="text-align: right;">
-              Funding for this program<br>
-              was made possible by<br>
-              viewers like <router-link to="about" style="color:red">YOU</router-link>
-            </div>
-          </el-footer>
+      <el-container id="MainLayout_frame" style="align-items: stretch;">
+        <el-container id="MainLayout_content">
+          <el-aside width="180px" id="sidebar" v-if="route.meta.sidebar_items">
+            <!-- <el-scrollbar> -->
+              
+              <el-menu id="sidebar_content">
+                <template v-for="(i) in route.meta.sidebar_items">
+                  <el-menu-item :index="i.id">  
+                    <el-icon> 
+                      <component :is="i.icon"></component>
+                    </el-icon>
+                    <router-link :to="i.to" style="font-size: small;">{{i.name}}</router-link>
+                  </el-menu-item>
+                </template>
+              </el-menu>
+            <!-- </el-scrollbar> -->
+          </el-aside>
+          <el-container id="main">
+              <el-main id="route-content">
+                <RouterView/>
+              </el-main>
+            <el-footer id="footer">
+              <div id="footer-l">
+                <img src="@/assets/logo.png" height="80px"></img>
+              </div>
+              <div id="footer-r" style="text-align: right;">
+                Funding for this program<br>
+                was made possible by<br>
+                viewers like <router-link to="about" style="color:red">YOU</router-link>
+              </div>
+            </el-footer>
+          </el-container>
         </el-container>
       </el-container>
     </el-container>
@@ -149,6 +147,81 @@ onMounted(()=>{
       <el-button type="primary" @click="onRegisterDataSubmit">Register</el-button>
       <el-button @click="needLogin=false">Cancel</el-button>
     </el-dialog>
+    <el-backtop :bottom="200" target="#route-content"/>
+    <vue-particles
+        id="tsparticlesBG"
+        :options="{
+            background: {
+                color: {
+                    value: '#FFFFFF'
+                }
+            },
+            fpsLimit: 60,
+            interactivity: {
+                events: {
+                    onClick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    onHover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                },
+                modes: {
+                    bubble: {
+                        distance: 360,
+                        duration: 2,
+                        opacity: 0.6,
+                        size: 33
+                    },
+                    push: {
+                        quantity: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    }
+                }
+            },
+            particles: {
+                color: {
+                    value: '#e799b0'
+                },
+                links: {
+                    color: '#9ac8e2',
+                    distance: 124,
+                    enable: true,
+                    opacity: 0.8,
+                    width: 1
+                },
+                move: {
+                    direction: 'none',
+                    enable: true,
+                    outModes: 'bounce',
+                    random: false,
+                    speed: 5,
+                    straight: false
+                },
+                number: {
+                    density: {
+                        enable: true,
+                    },
+                    value: 120
+                },
+                opacity: {
+                    value: 0.5
+                },
+                shape: {
+                    type: 'circle'
+                },
+                size: {
+                    value: { min: 0.3, max: 3 }
+                }
+            },
+            detectRetina: true
+        }"
+    />
   </div>
 </template>
 
@@ -165,14 +238,25 @@ onMounted(()=>{
     top:0;
     left:0;
   }
-  #MainLayout .el-container{
+  /* #MainLayout .el-container{
+    height: 100%;
+  } */
+  #MainLayout_frame{
+    min-height: calc(100% - 60px);
+    height: calc(100% - 60px);
+  }
+  #MainLayout_content{
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 5px 0 rgb(202, 202, 202);
     height: 100%;
   }
   #main{
     height: 100%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background: #efefef;
   }
   .ver_center {
       display: flex;
@@ -185,7 +269,7 @@ onMounted(()=>{
     padding:0 0 ;
   }
   #sidebar .el-menu{
-    background: #f7f9fb;
+    background: #fcfcfd;
     height: 100%;
   }
   .el-menu-item a,a:link,a:hover {
@@ -218,6 +302,7 @@ onMounted(()=>{
     justify-content: space-between;
     justify-items: center;
     height: 115px;
+    background: #ffffff;
     /* background-color: #e799b0; */
   }
   #footer div{
@@ -228,6 +313,10 @@ onMounted(()=>{
   }
   #route-content{
     padding: 16px;
+    background: #ffffff;
   }
-  
+  #tsparticlesBG {
+    position:absolute;
+    z-index:-1;
+  }
 </style>
