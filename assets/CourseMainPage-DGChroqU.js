@@ -1,0 +1,1 @@
+import{_ as t,r as o,b as n,c,d as s}from"./index-PU1-4Rr9.js";const r={},_={id:"empty"};function a(i,p){const e=o("el-empty");return n(),c("div",_,[s(e,{description:"Constructing"})])}const m=t(r,[["render",a]]);export{m as default};
